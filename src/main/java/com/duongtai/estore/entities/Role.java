@@ -1,6 +1,5 @@
 package com.duongtai.estore.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,6 +8,10 @@ import java.util.List;
 @Table(name = "Roles")
 public class Role {
 
+	enum ROLES {
+			ROLE_USER, ROLE_ADMIN;
+	}
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
@@ -17,7 +20,6 @@ public class Role {
     private String name;
 
     @OneToMany(targetEntity = User.class, mappedBy = "role",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JsonIgnore
     private List<User> users;
 
     public Role() {

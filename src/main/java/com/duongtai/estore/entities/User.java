@@ -6,8 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "User")
 public class User {
+	
+	enum GENDER {
+		MALE, FEMALE, UNKNOWN;
+	}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +21,7 @@ public class User {
     @Column(name = "full_name")
     private String full_name;
 
-    @Column(name = "email",unique = true)
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "username", unique = true)
@@ -25,7 +29,7 @@ public class User {
 
     private String password;
 
-    @Column(name = "joined_at",updatable = false)
+    @Column(name = "joined_at", updatable = false)
     private String joined_at;
 
     private String last_edited;
@@ -40,6 +44,9 @@ public class User {
     @JoinColumn(name = "role", referencedColumnName = "role_id")
     private Role role;
 
+    @OneToMany(targetEntity = Order.class, mappedBy = "customer",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Order> orders;
+    
     public User() {
     }
 
@@ -130,4 +137,14 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+    
+    
 }
