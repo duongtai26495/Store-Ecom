@@ -191,4 +191,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return new MyUserDetail(user);
     }
 
+
+	@Override
+	public List<Order> findOrderByUsername(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

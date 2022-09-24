@@ -1,10 +1,12 @@
 package com.duongtai.estore.services;
 
+import com.duongtai.estore.entities.Order;
 import com.duongtai.estore.entities.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 public interface UserService {
 
@@ -24,4 +26,6 @@ public interface UserService {
 
     void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException;
 
+	List<Order> findOrderByUsername(String username);
+	
 }
