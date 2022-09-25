@@ -6,13 +6,14 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.duongtai.estore.configs.Snippets;
 import com.duongtai.estore.entities.Category;
 import com.duongtai.estore.repositories.CategoryRepository;
 import com.duongtai.estore.services.CategoryService;
 import static com.duongtai.estore.configs.MyUserDetail.getUsernameLogin;
-
+@Service
 public class CategoryServiceImpl implements CategoryService{
 
 	@Autowired

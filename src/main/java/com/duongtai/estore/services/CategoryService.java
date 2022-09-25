@@ -19,4 +19,6 @@ public interface CategoryService {
 	Category findCategoryById(Long id);
 	
 	boolean isExistByName(String name);
+	
+	
 }

@@ -3,7 +3,41 @@
 <head th:replace="master/views/fragments/fragments::header_admin">
 </head>
 <body class="admin_body">
-<div th:replace="master/views/fragments/fragments::header_nav">
+
+
+<div class="contaner-fluid main_view col-12 d-flex">
+	<div class="" th:replace="master/views/fragments/fragments::left_menu_bar"></div>
+	<div class="col-12 dashboard_main">
+		<div th:replace="master/views/fragments/fragments::header_nav">
+		</div>
+		<div class="d-flex col-12">
+			<div class="p-5 col-8">
+				<div th:if="${content == 'dashboard'}" th:each="order : ${orders}">
+					<span>[[${order.id}]]</span>
+					</div>
+				
+					<div th:if="${content == 'products'}" th:each="product : ${products}">
+					
+					</div>
+					
+					<div th:replace="master/views/fragments/product_view::product_list_view"></div>
+					
+					<div th:if="${content == 'vendors'}" th:each="vendor : ${vendors}">
+					<span>[[${vendor.name}]]</span>
+					</div>
+					
+					<div th:if="${content == 'categories'}" th:each="category : ${categories}">
+					<span>[[${category.name}]]</span>
+					</div>
+					
+			</div>
+			
+			<div class="user_content col-4">
+				
+			</div>
+		</div>
+		
+	</div>
 </div>
 </body>
 </html>

@@ -30,7 +30,7 @@ build/
 !**/src/test/**/build/
 /src/resources/application.properties
 local.env
-/uploads/
+!/uploads/
 
 ### VS Code ###
 .vscode/

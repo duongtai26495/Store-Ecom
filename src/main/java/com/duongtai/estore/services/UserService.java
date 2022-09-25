@@ -28,4 +28,5 @@ public interface UserService {
 
 	List<Order> findOrderByUsername(String username);
 	
+	List<User> findAllUser();
 }

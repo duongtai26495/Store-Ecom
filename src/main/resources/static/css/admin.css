@@ -1,17 +1,128 @@
 :root{
-	--primary-color: #5ac3d6;
-	--secondary-color: #89deeb;
+	--primary-color: rgb(98, 206, 203);
+	--secondary-color: rgb(0, 255, 255);
 	--background-color:#bfe9f2;
+	--background-active:#fff;
 }
-
+a{
+	text-decoration: none!important;
+}
 *{
 	padding:0;
 	margin:0;
 }
+.dashboard_main{
+	flex:1!important;
+}
+.avatar, .details_img{
+	border-radius:5px!important;
+}
 .admin_body{
 	background-color:rgba(240,240,240,1)!important;
 }
-
+.admin_name{
+	color:black;
+	text-decoration: none;
+	font-weight: bold;
+	font-size:1.2rem;
+}
+.user_list .avatar{
+	width: 50px;
+	margin-right:10px;
+}
+.user_link p{
+	font-size: 12px;
+	font-weight: bold;
+	color:black;
+	margin-bottom:0px!important;
+}
+.user_details p{
+	font-size: 12px;
+	font-weight: bold;
+	color:black;
+	margin-bottom:5px!important;
+}
+.user_row:hover{
+    box-shadow: 3px 3px 6px 2px rgb(183 183 183 / 50%);
+}
+.user_row{
+	border-radius:5px;
+    border:0.5px solid rgb(183 183 183 / 50%);
+    transition:.3s;
+    background:white;
+}
+.user_row .nav-item{
+	margin-bottom:0px!important;
+}
+.details_img{
+	height:200px;
+    max-width: 150px;
+	margin-right:1rem;
+}
+.user_list{
+	border:1px solid grey;
+	border-radius:5px;
+	background:white;
+	box-shadow: 2px 2px 2px 0px rgb(183 183 183 / 50%);
+    border:0.5px solid rgb(183 183 183 / 50%);
+}
 .main_nav{
-	
+	background-color:var(--primary-color);
+}
+.active_user_row{
+	background-color:var(--primary-color);
+	border:1px solid grey;
+}
+.main_view{
+	transition:.3s;
+}
+.left_menu_bar{
+	min-height:100vh;
+	overflow: hidden;
+	transition:.3s;
+	top:0;
+	left:0px;
+	background-color:var(--primary-color);
+	position: relative;
+	display: flex;
+    flex-direction: column;
+}
+.left_menu_content{
+	height:100vh;
+	width:150px;
+}
+.logo_nav .logo{
+	max-width:100px;
+}
+.nav-link.btn{
+	justify-content:start;
+    display: flex;
+    text-align:left;
+    border-radius:0px;
+    transition:0.3s;
+    color:white;
+    flex-direction: row;
+    align-items: center;
+}
+.nav-link.btn i{
+	margin-right:10px;
+}
+.logo{
+	width:100%;
+}
+.nav-link:hover{
+	background-color:var(--secondary-color);
+	color:black!important;
+}
+.active{
+	background-color:var(--background-active)!important;
+	color:black!important;
+}
+.user_details{
+	position:fixed;
+	padding:1rem;
+	border-radius:10px;
+	width:500px!important;
+	background:white;
+	box-shadow: 2px 2px 2px 0px rgb(183 183 183 / 50%);
 }

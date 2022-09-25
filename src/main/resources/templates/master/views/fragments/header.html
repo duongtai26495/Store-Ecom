@@ -6,12 +6,19 @@
 
 <div th:fragment="header_desktop">
 <nav class="container-fluid main_nav">
+	<div class="col-12">
+		<div class="btn">
+			<span id="menu_icon"><i class="fa-solid fa-bars"></i></span>
+		</div>
+		<div class="btn">
+			<a class="admin_name" ><i class="fa-solid fa-user-tie"></i> [[${#request.userPrincipal.principal.fullname}]]</a> 
+		</div>
+	</div>
 </nav>
-</div>
 
 <div th:fragment="header_mobile">
 
 </div>
-
+</div>
 </body>
 </html>

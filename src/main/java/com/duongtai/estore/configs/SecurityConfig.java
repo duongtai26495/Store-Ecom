@@ -34,14 +34,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 	"/login",
                     "/register",
                     "/user/profile/*",
-                    "/user/images/*",
+                    "/user/images/**",
                 	"/create_user",
                     "/images/**",
                     "/css/**",
-                    "/js/**").permitAll()
-                .antMatchers("/master/**").hasAnyAuthority(Snippets.ROLE_ADMIN)
-                .and()
-                .exceptionHandling().accessDeniedHandler(accessDeniedHandler())
+                    "/js/**",
+                    "/fontawesome/**").permitAll()
+                .antMatchers("/master/**","/user/**").hasAnyAuthority(Snippets.ROLE_ADMIN)
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -54,8 +53,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutSuccessUrl("/login?logout=success")
                     .permitAll()
                 .and()
-                
-                .authorizeRequests().anyRequest().authenticated();
+                .authorizeRequests()
+                .anyRequest().permitAll()
+                .and()
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler());
     }
     
 

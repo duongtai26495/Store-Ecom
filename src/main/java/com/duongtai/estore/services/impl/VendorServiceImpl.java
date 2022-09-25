@@ -5,12 +5,14 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.duongtai.estore.configs.Snippets;
 import com.duongtai.estore.entities.Vendor;
 import com.duongtai.estore.repositories.VendorRepository;
 import com.duongtai.estore.services.VendorService;
 import static com.duongtai.estore.configs.MyUserDetail.getUsernameLogin;
+@Service
 public class VendorServiceImpl implements VendorService{
 
 	@Autowired

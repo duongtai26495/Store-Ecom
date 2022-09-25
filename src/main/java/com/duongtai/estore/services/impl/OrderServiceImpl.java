@@ -1,6 +1,7 @@
 package com.duongtai.estore.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.duongtai.estore.configs.Snippets;
 import com.duongtai.estore.entities.Order;
@@ -10,7 +11,9 @@ import static com.duongtai.estore.configs.MyUserDetail.getUsernameLogin;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
+@Service
 public class OrderServiceImpl implements OrderService{
 
 	@Autowired
@@ -51,6 +54,11 @@ public class OrderServiceImpl implements OrderService{
 			return orderRepository.findById(id).get();
 		}
 		return null;
+	}
+
+	@Override
+	public List<Order> findAllOrder() {
+		return orderRepository.findAll();
 	}
 
 }
