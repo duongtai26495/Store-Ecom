@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<div  th:if="${content == 'users'}" th:fragment="product_list_view" class="d-flex flex-row col-12">
+<div  th:if="${content == 'users'}" th:fragment="user_list_view" class="d-flex flex-row col-12">
 	<div class="user_list col-12 col-md-5 p-2" >
 		
 		<p>User list:</p>
@@ -22,7 +22,8 @@
 	</div>
 	
 	<div class="col-md-6 offset-3 col-12">
-		<div th:if="${user_details != null}" class="col-12 user_details d-flex flex-row">
+		<div th:if="${user_details != null}" class="col-12 user_details">
+			<div class=" d-flex flex-row">
 			<img class="details_img" th:src="@{/user/images/}+${user_details.username}"/>
 			<div>
 				<h5>[[${user_details.full_name}]]</h5>
@@ -35,8 +36,26 @@
 				<p th:if="${user_details.gender == 2}" th:text="'Gender: Female'"></p>
 				<p th:if="${user_details.gender == 3}" th:text="'Gender: Unkwon'"></p>
 			</div>
-			
+			</div>
+			<div th:if="${user_details.id != 1}" class="user_update mt-1 col-12">
+				<form method="POST" class="align-items-start d-flex flex-column" th:object="${user}" th:action="@{/master/edit/}+${user_details.username}">
+					<div >	
+					<input type="radio" id="active" th:checked="${user_details.active}" name="active" value="true">
+					<label for="active">Active</label>
+					<input type="radio" id="unactive" th:checked="${user_details.active == false}"  name="active" value="false">
+					<label for="unactive">Unactive</label>
+					</div>
+					<div>
+					<input type="radio" id="role_admin" th:checked="${user_details.role.name == 'ROLE_ADMIN'}" name="role" value="2">
+					<label for="role">Admin</label>
+					<input type="radio" id="role_user" th:checked="${user_details.role.name == 'ROLE_USER'}"  name="role" value="1">
+					<label for="role">User</label>
+					</div>
+					<button type="submit" class="btn btn-success">Update</button>
+				</form>
+			</div>
 		</div>
+		
 	</div>
 </div>
 </body>

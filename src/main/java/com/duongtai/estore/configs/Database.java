@@ -31,7 +31,7 @@ public class Database {
                 user.setPassword(passwordEncoder.encode("Blackhat9981"));
                 user.setGender(1);
                 user.setRole(role_admin);
-                user.setActive(1);
+                user.setActive(true);
                 if(userService.findByUsername(user.getUsername()) == null) {
                 userRepository.save(user);
                 }

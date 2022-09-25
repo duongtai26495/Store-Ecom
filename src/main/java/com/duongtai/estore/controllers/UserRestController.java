@@ -53,18 +53,18 @@ public class UserRestController {
 				new ResponseObject(Snippets.FAILED,Snippets.EMAIL_ALREADY_TAKEN +" or " + Snippets.USERNAME_ALREADY_TAKEN, null));
     }
 
-    @PutMapping("edit/{username}")
-    public ResponseEntity<ResponseObject> editByUsername(@PathVariable String username, @RequestBody User user){
-        user.setUsername(username);
-        if(userService.findByUsername(username) != null) {
-        	UserDTO userDTO = ConvertEntity.convertToDTO(userService.editByUsername(user));
-        	return ResponseEntity.status(HttpStatus.OK).body(
-        			new ResponseObject(Snippets.SUCCESS, Snippets.USER_EDITED, userDTO)
-        			);
-        }
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(
-				new ResponseObject(Snippets.FAILED,Snippets.USER_NOT_FOUND, null));
-    }
+//    @PutMapping("edit/{username}")
+//    public ResponseEntity<ResponseObject> editByUsername(@PathVariable String username, @RequestBody User user){
+//        user.setUsername(username);
+//        if(userService.findByUsername(username) != null) {
+//        	UserDTO userDTO = ConvertEntity.convertToDTO(userService.editByUsername(user));
+//        	return ResponseEntity.status(HttpStatus.OK).body(
+//        			new ResponseObject(Snippets.SUCCESS, Snippets.USER_EDITED, userDTO)
+//        			);
+//        }
+//        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(
+//				new ResponseObject(Snippets.FAILED,Snippets.USER_NOT_FOUND, null));
+//    }
 
     @PutMapping("change_password")
     public ResponseEntity<ResponseObject> updatePasswordByUsername(@RequestBody User user){

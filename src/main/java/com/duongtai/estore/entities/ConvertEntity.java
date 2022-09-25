@@ -8,6 +8,7 @@ public class ConvertEntity {
         userDTO.setEmail(user.getEmail());
         userDTO.setGender(user.getGender());
         userDTO.setId(user.getId());
+        userDTO.setOrders(user.getOrders());
         userDTO.setActive(user.getActive());
         userDTO.setJoined_at(user.getJoined_at());
         userDTO.setLast_edited(user.getLast_edited());

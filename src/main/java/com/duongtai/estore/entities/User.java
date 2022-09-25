@@ -34,7 +34,7 @@ public class User {
 
     private String last_edited;
 
-    private int active;
+    private boolean active;
 
     private int gender;
 
@@ -114,15 +114,16 @@ public class User {
         this.password = password;
     }
 
-    public int getActive() {
+    public boolean getActive() {
         return active;
     }
 
-    public void setActive(int active) {
-        this.active = active;
-    }
+  
+    public void setActive(boolean active) {
+		this.active = active;
+	}
 
-    public int getGender() {
+	public int getGender() {
         return gender;
     }
 

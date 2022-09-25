@@ -1,5 +1,7 @@
 package com.duongtai.estore.entities;
 
+import java.util.List;
+
 public class UserDTO {
 
     private Long id;
@@ -14,8 +16,10 @@ public class UserDTO {
 
     private String last_edited;
 
-    private int active;
+    private boolean active;
 
+    private List<Order> orders;
+    
     private int gender;
 
     private int diaries_count = 0;
@@ -68,15 +72,24 @@ public class UserDTO {
         this.username = username;
     }
 
-    public int getActive() {
-        return active;
-    }
+   
+    public boolean isActive() {
+		return active;
+	}
 
-    public void setActive(int active) {
-        this.active = active;
-    }
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 
-    public int getGender() {
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
+	public int getGender() {
         return gender;
     }
 
