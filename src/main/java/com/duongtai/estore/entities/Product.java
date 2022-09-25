@@ -51,6 +51,9 @@ public class Product {
 	@ManyToMany(mappedBy = "products")
 	private List<Order> orders;
 
+	@Column(name="quantity")
+	private int quantity;
+	
 	public Product() {
 		
 	}
@@ -142,6 +145,14 @@ public class Product {
 
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	

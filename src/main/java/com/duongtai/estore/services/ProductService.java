@@ -23,4 +23,6 @@ public interface ProductService {
 	List<Product> findAllProduct();
 	
 	Product findProductById(Long id);
+	
+	boolean isExistByName(String name);
 }

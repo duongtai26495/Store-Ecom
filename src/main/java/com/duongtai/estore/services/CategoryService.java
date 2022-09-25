@@ -10,13 +10,13 @@ public interface CategoryService {
 	
 	Category editCategoryById(Category category);
 	
-	void deleteCategoryById(Category category);
+	void deleteCategoryById(Long id);
 	
 	List<Category> findAllCategory();
 	
 	List<Category> findCategoryByName(String name);
 	
-	List<Category> findCategoryById(Long id);
+	Category findCategoryById(Long id);
 	
-	
+	boolean isExistByName(String name);
 }

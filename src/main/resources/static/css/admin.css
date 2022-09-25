@@ -1,0 +1,17 @@
+:root{
+	--primary-color: #5ac3d6;
+	--secondary-color: #89deeb;
+	--background-color:#bfe9f2;
+}
+
+*{
+	padding:0;
+	margin:0;
+}
+.admin_body{
+	background-color:rgba(240,240,240,1)!important;
+}
+
+.main_nav{
+	
+}

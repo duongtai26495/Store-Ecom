@@ -14,5 +14,5 @@ public interface VendorService {
 	
 	List<Vendor> findAllVendor();
 	
-	
+	boolean isExistByName(String name);
 }
