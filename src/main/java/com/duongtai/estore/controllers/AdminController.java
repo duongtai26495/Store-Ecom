@@ -1,15 +1,22 @@
 package com.duongtai.estore.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import static com.duongtai.estore.configs.MyUserDetail.getUsernameLogin;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.duongtai.estore.services.impl.UserServiceImpl;
+
 @Controller
 @RequestMapping("/master")
 public class AdminController {
 
+	@Autowired
+	private UserServiceImpl userService;
+	
 	
 	@GetMapping("")
 	public ModelAndView home(ModelMap model) {

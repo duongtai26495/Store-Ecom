@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 @EnableWebSecurity
 @Configuration
@@ -27,7 +28,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasAnyAuthority(Snippets.ROLE_ADMIN)
                 .antMatchers("/user/**").hasAnyAuthority(Snippets.ROLE_USER)
                 .antMatchers(
                 	"/",
@@ -39,6 +39,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     "/images/**",
                     "/css/**",
                     "/js/**").permitAll()
+                .antMatchers("/master/**").hasAnyAuthority(Snippets.ROLE_ADMIN)
+                .and()
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler())
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -48,9 +51,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .logout()
                     .logoutUrl("/user/logout")
-                    .logoutSuccessUrl("/login?logout=true")
+                    .logoutSuccessUrl("/login?logout=success")
                     .permitAll()
                 .and()
+                
                 .authorizeRequests().anyRequest().authenticated();
     }
     
@@ -88,6 +92,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+    
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+    	return new CustomAccessDeniedHandler();
+    }
+    
 
 //    @Bean
 //    CorsConfigurationSource corsConfigurationSource(){
