@@ -28,9 +28,9 @@ public class Product {
 	@Column(name = "product_note", length=2000)
 	private String product_note;
 	
-	@ManyToMany
-	@JoinTable(name = "product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
-	private List<Category> categories;
+	@ManyToOne()
+    @JoinColumn(name = "products", referencedColumnName = "category_id")
+	private Category category;
 	
 	@ManyToOne
 	@JoinColumn(name = "vendor", referencedColumnName = "vendor_id")
@@ -83,12 +83,14 @@ public class Product {
 		this.product_note = product_note;
 	}
 
-	public List<Category> getCategories() {
-		return categories;
+	
+
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setCategories(List<Category> categories) {
-		this.categories = categories;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	public Vendor getVendor() {

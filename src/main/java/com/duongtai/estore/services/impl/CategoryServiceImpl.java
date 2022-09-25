@@ -44,7 +44,7 @@ public class CategoryServiceImpl implements CategoryService{
 	        	return category;
 	        };
 		}
-		return null;
+		return saveCategory(category);
 	}
 
 	@Override

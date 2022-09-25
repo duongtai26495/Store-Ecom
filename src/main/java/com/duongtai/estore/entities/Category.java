@@ -36,7 +36,7 @@ public class Category {
 	
 	private String last_edited;
 	
-	@ManyToMany(mappedBy = "categories")
+	@OneToMany(targetEntity = Product.class, mappedBy = "category",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<Product> products;
 
 	public Category() {

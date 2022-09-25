@@ -42,7 +42,7 @@ public class VendorServiceImpl implements VendorService{
 				return vendor;
 			}
 		}
-		return null;
+		return saveVendor(vendor);
 	}
 
 	@Override

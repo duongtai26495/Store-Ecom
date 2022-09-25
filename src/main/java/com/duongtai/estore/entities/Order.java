@@ -1,6 +1,8 @@
 package com.duongtai.estore.entities;
 
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,7 +39,10 @@ public class Order {
 	
 	private double discount;
 	
+	@Column(updatable = false)
 	private String created_at;
+	
+	private String last_edited_at;
 	
 	private boolean isFinish;
 
@@ -87,6 +92,7 @@ public class Order {
 	}
 
 	public double getTotal() {
+	
 		return total;
 	}
 
@@ -148,6 +154,20 @@ public class Order {
 
 	public void setCustomer(User customer) {
 		this.customer = customer;
+	}
+
+
+
+
+	public String getLast_edited_at() {
+		return last_edited_at;
+	}
+
+
+
+
+	public void setLast_edited_at(String last_edited_at) {
+		this.last_edited_at = last_edited_at;
 	}
 
 	

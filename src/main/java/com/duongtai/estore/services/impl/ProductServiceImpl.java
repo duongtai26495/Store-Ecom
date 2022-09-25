@@ -1,6 +1,7 @@
 package com.duongtai.estore.services.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -41,52 +42,76 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Product editProductById(Product product) {
 		Product p_found = productRepository.findById(product.getId()).get();
+		if(isExistByName(product.getName()) && !product.getName().toLowerCase().strip()
+							.equals(p_found.getName().toLowerCase().strip())) {
+			return null;
+		}
 		if(p_found!=null && product.getName().toLowerCase().strip()
 							.equals(p_found.getName().toLowerCase().strip())) {
 			
-			Date date = new Date();
-	        SimpleDateFormat sdf = new SimpleDateFormat(Snippets.TIME_PATTERN);
-			product.setLast_edited(sdf.format(date));
-			productRepository.save(product);
-			return product;
+				Date date = new Date();
+		        SimpleDateFormat sdf = new SimpleDateFormat(Snippets.TIME_PATTERN);
+				product.setLast_edited(sdf.format(date));
+				productRepository.save(product);
+				return product;
+			
 		}
-		return null
+		
+		return saveProduct(product);
 	}
 
 	@Override
 	public void deleteProductById(Long id) {
-		// TODO Auto-generated method stub
-		
+		if(productRepository.existsById(id)) {
+			productRepository.deleteById(id);
+		}
 	}
 
 	@Override
 	public List<Product> findProductByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Product> products = productRepository.findAll();
+		List<Product> products_found = new ArrayList<>();
+			for(Product product : products) {
+				if(product.getName().toLowerCase().strip()
+						.contains(name.toLowerCase().strip())) {
+					products_found.add(product);
+				}
+			}
+			return products_found;
 	}
 
 	@Override
 	public List<Product> findProductByCategory(Category category) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Product> products = productRepository.findAll();
+		List<Product> products_found = new ArrayList<>();
+		for(Product product : products) {
+			if(product.getCategory().equals(category)) {
+				products_found.add(product);
+			}
+		}
+		return products_found;
 	}
 
 	@Override
 	public List<Product> findProductByVendor(Vendor vendor) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Product> products = productRepository.findAll();
+		List<Product> products_found = new ArrayList<>();
+		for(Product product : products) {
+			if(product.getVendor().equals(vendor)) {
+				products_found.add(product);
+			}
+		}
+		return products_found;
 	}
 
 	@Override
 	public List<Product> findAllProduct() {
-		// TODO Auto-generated method stub
-		return null;
+		return productRepository.findAll();
 	}
 
 	@Override
 	public Product findProductById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return productRepository.findById(id).get();
 	}
 
 	@Override
