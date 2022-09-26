@@ -9,7 +9,7 @@
 <div  th:if="${content == 'users'}" th:fragment="user_list_view" class="d-flex flex-row col-12">
 	<div class="user_list col-12 col-md-5 p-2" >
 		
-		<p>User list:</p>
+		<div class="col-12" th:text="'Total '+ ${#lists.size(users)} + ' users:'"></div>
 		<div th:class="${user_details.username} == ${username} ? 'active_user_row user_row col-12 p-2 mt-2' : 'user_row col-12 p-2 mt-2'" th:each="user : ${users}">
 			<a class="d-flex align-items-center flex-row user_link" th:href="@{/master?content=users&username=}+${user.username}">
 			<img class="avatar" th:src="@{/user/images/}+${user.username}"/>

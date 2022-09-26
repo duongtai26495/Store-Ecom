@@ -11,7 +11,7 @@
 		<div th:replace="master/views/fragments/fragments::header_nav">
 		</div>
 		<div class="d-flex col-12">
-			<div class="p-5 col-8">
+			<div class="p-5 col-12">
 				<div th:if="${content == 'dashboard'}" th:each="order : ${orders}">
 					<span>[[${order.id}]]</span>
 					</div>
@@ -26,14 +26,10 @@
 					<span>[[${vendor.name}]]</span>
 					</div>
 					
-					<div th:if="${content == 'categories'}" th:each="category : ${categories}">
-					<span>[[${category.name}]]</span>
-					</div>
 					
-			</div>
-			
-			<div class="user_content col-4">
-				
+					<div th:replace="master/views/fragments/category_view::categories"></div>
+					
+					
 			</div>
 		</div>
 		

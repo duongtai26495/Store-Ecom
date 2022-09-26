@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.duongtai.estore.configs.Snippets;
+import com.duongtai.estore.controllers.AdminController;
 import com.duongtai.estore.entities.Category;
 import com.duongtai.estore.repositories.CategoryRepository;
 import com.duongtai.estore.services.CategoryService;
@@ -16,6 +19,8 @@ import static com.duongtai.estore.configs.MyUserDetail.getUsernameLogin;
 @Service
 public class CategoryServiceImpl implements CategoryService{
 
+	private static final Logger LOG = LoggerFactory.getLogger(CategoryServiceImpl.class);
+	
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
@@ -28,21 +33,59 @@ public class CategoryServiceImpl implements CategoryService{
 	        category.setLast_edited(sdf.format(date));
 	        category.setCreated_by(getUsernameLogin());
 	        if(categoryRepository.save(category) != null) {
+	        	LOG.info(String.format("Admin: '%s' have create new category name '%s' successfully", 
+		    			getUsernameLogin(),
+		    			category.getName()));
 	        	return category;
 	        }	
 		}
-		
+		LOG.info(String.format("Admin: '%s' have create new category name '%s' failed", 
+    			getUsernameLogin(),
+    			category.getName()));
         return null;
 	}
 
 	@Override
 	public Category editCategoryById(Category category) {
+		
 		if(categoryRepository.existsById(category.getId())) {
+			Category cate_found = findCategoryById(category.getId());
+
+			if(!category.getName().isEmpty() 
+					&& !category.getName().strip().toLowerCase()
+					.equals(cate_found.getName().strip().toLowerCase())) {
+		    	
+		    	LOG.info(String.format("Admin: '%s' have changed category name from '%s' to '%s'", 
+		    			getUsernameLogin(),
+		    			cate_found.getName(), 
+		    			category.getName()));
+		    	
+				cate_found.setName(category.getName());
+			}
+			if(!category.getCategory_dtails().isEmpty() 
+					&& !category.getCategory_dtails().strip().toLowerCase()
+					.equals(cate_found.getCategory_dtails().strip().toLowerCase())) {
+			
+				LOG.info(String.format("Admin: '%s' have changed category details from '%s' to '%s'", 
+		    			getUsernameLogin(),
+		    			cate_found.getCategory_dtails(), 
+		    			category.getCategory_dtails()));
+				
+				cate_found.setCategory_dtails(category.getCategory_dtails());
+			}
+			
+			if(category.getImage() != null) {
+				LOG.info(String.format("Admin: '%s' have changed category details from '%s' to '%s'", 
+		    			getUsernameLogin(),
+		    			cate_found.getImage(), 
+		    			category.getImage()));
+			
+			}
 			Date date = new Date();
 	        SimpleDateFormat sdf = new SimpleDateFormat(Snippets.TIME_PATTERN);
 	        category.setLast_edited(sdf.format(date));
-	        if(categoryRepository.save(category)!=null) {
-	        	return category;
+	        if(categoryRepository.save(cate_found)!=null) {
+	        	return cate_found;
 	        };
 		}
 		return saveCategory(category);

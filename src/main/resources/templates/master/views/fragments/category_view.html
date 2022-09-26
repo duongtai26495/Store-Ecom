@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div class="cate_list col-12 flex-row d-flex" th:if="${content == 'categories'}"  th:fragment="categories">	
+		
+		<div class="col-md-4 col-12 bg-white p-2" >
+		<div class="col-12" th:text="'Total '+ ${#lists.size(categories)} + 'categories:'"></div>
+		<div class="col-12 p-2 mt-2 cate-row bg-white hover_row" th:each="category : ${categories}">
+			<a class="d-flex align-items-center flex-row user_link" th:href="@{/master?content=categories&cate_id=}+${category.id}" >
+			<img class="avatar" th:src="@{/images/}+${category.image}"/>
+			<span class="flex-row align-items-center">
+			<h5 class="col-12 nav-item">[(${category.name})]</h5>
+			<p class="col-12">[(${category.category_dtails})]</p>
+			</span>
+			</a>
+		</div>
+		</div>
+		<div class="col-md-3 offset-md-1 col-12" th:if="${cate_id != ''}">
+			<div class="col-12">
+			<form th:action="@{/master/edit_cate/}+${edit_category.id}" class="col-12 form-group form-create-cate" th:object="${edit_category}" method="POST" >
+				<p class=""><center>Edit Cate <strong>[[${edit_category.name}]]</strong></center></p>
+				<label for="edit_cate_name">Category name</label>
+				<input type="text" id="edit_cate_name" class="form-control" name="name" th:value="${edit_category.name}" placeholder="Name"/>
+				<label for="edit_cate_detail" class="mt-2">Category detail</label>
+				<textarea rows="3" cols="20" id="edit_cate_detail" class="form-control" th:value="${edit_category.category_dtails}" name="category_dtails" placeholder="Detail">[[${edit_category.category_dtails}]]</textarea>
+				<button type="submit" class="btn btn-success col-12 mt-2" name="submit">Save</button>
+			</form>
+		</div>
+		</div>
+		<div class="col-md-3 offset-md-1 col-12">
+			<form th:action="@{/master/save_cate}" class="col-12 form-group form-create-cate" th:object="${category}" method="POST" >
+			
+				<p class="col-12"><center>New Category</center></p>
+				<label for="cate_name">Category name</label>
+				<input type="text" id="cate_name" class="form-control" name="name" th:value="${category.name}" placeholder="Name"/>
+				<label for="cate_detail" class="mt-2">Category detail</label>
+				<textarea name="category_dtails" placeholder="Detail" rows="3" cols="20" id="cate_detail" class="form-control" th:value="${category.category_dtails}">[[${category.category_dtails}]]</textarea>
+
+				<button type="submit" class="btn btn-success col-12 mt-2" name="submit">Save</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

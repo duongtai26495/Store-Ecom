@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.duongtai.estore.configs.CustomAccessDeniedHandler;
+import com.duongtai.estore.entities.Category;
 import com.duongtai.estore.entities.ConvertEntity;
 import com.duongtai.estore.entities.User;
 import com.duongtai.estore.entities.UserDTO;
@@ -57,8 +58,8 @@ public class AdminController {
 	@GetMapping("")
 	public ModelAndView home(ModelMap model, 
 			@PathParam("content") String content,
-			@PathParam("username") String username) { 
-		model.addAttribute("title", "Admin - Home");
+			@PathParam("username") String username,
+			@PathParam("cate_id") String cate_id) { 
 		if(content == null) {
 			content = "dashboard";
 		}
@@ -75,7 +76,12 @@ public class AdminController {
 		case "vendors":
 			model.addAttribute("vendors", vendorService.findAllVendor());
 			break;
-		case "categories:":
+		case "categories":
+			if(cate_id != null) {
+			model.addAttribute("edit_category", categoryService.findCategoryById(Long.parseLong(cate_id)));
+			}else {
+			model.addAttribute("edit_category", categoryService.findAllCategory().get(0));
+			}
 			model.addAttribute("categories", categoryService.findAllCategory());
 			break;
 		default:
@@ -84,10 +90,15 @@ public class AdminController {
 		if(username == null) {
 			username = getUsernameLogin();
 		}
+		
+		model.addAttribute("title", "Admin - Home");
+		model.addAttribute("category", new Category());
 		model.addAttribute("user_details", userService.findByUsername(username));
 		model.addAttribute("content", content);
 		return new ModelAndView("master/views/index",model);
 	}
+	
+	
 
     @PostMapping("edit/{username}")
     public ModelAndView editByUsername(ModelMap model, @PathVariable String username, @ModelAttribute User user){
@@ -104,5 +115,28 @@ public class AdminController {
     @GetMapping("/images/{username}")
     public ResponseEntity<byte[]> getUserImage (@PathVariable String username){
         return storageService.readProfileImage(username);
+    }
+    
+    
+    @PostMapping("save_cate")
+    public ModelAndView saveCategory(ModelMap model, @ModelAttribute Category category) {
+    	LOG.info("ADMIN: "+getUsernameLogin() + " added a categories "+category.getName());
+    	if(category != null) {
+    		categoryService.saveCategory(category);
+    	}
+    	return new ModelAndView("redirect:/master?content=categories");
+    }
+    
+    @PostMapping("edit_cate/{cate_id}")
+    public ModelAndView editCateById(
+    		ModelMap model, 
+    		@PathVariable String cate_id, 
+    		@ModelAttribute Category category){
+    	if(categoryService.findCategoryById(Long.parseLong(cate_id)) != null) {
+    		category.setId(Long.parseLong(cate_id));
+    		categoryService.editCategoryById(category);
+    		return new ModelAndView("redirect:/master?content=categories&cate_id="+cate_id);
+    	}
+    	return new ModelAndView("redirect:/master?content=categories&cate_id="+cate_id);
     }
 }
