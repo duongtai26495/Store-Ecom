@@ -12,6 +12,8 @@ public interface VendorService {
 	
 	void deleteVendorById(Long id);
 	
+	Vendor findVendorById(Long id);
+	
 	List<Vendor> findAllVendor();
 	
 	boolean isExistByName(String name);

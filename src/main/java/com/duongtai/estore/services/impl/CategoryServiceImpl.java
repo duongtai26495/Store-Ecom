@@ -51,6 +51,10 @@ public class CategoryServiceImpl implements CategoryService{
 		if(categoryRepository.existsById(category.getId())) {
 			Category cate_found = findCategoryById(category.getId());
 
+			if(!category.getImage().isEmpty() && !category.getImage().equals(cate_found.getImage())) {
+				cate_found.setImage(category.getImage());
+			}
+			
 			if(!category.getName().isEmpty() 
 					&& !category.getName().strip().toLowerCase()
 					.equals(cate_found.getName().strip().toLowerCase())) {

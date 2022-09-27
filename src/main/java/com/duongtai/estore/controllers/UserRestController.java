@@ -92,7 +92,7 @@ public class UserRestController {
     			
     }
 
-    @PostMapping("uploadImage")
+    @PostMapping("upload_image")
     public ResponseEntity<ResponseObject> uploadImage(@RequestParam("image") MultipartFile file){
     	String filename = storageService.storeFile(file, "noname");
 		if(filename != null) {

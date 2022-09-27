@@ -30,7 +30,7 @@ public class Vendor {
 	
 	private String created_by;
 	
-	private String vendor_image;
+	private String image;
 	
 	@OneToMany(targetEntity = Product.class, mappedBy = "vendor", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<Product> products;
@@ -87,13 +87,14 @@ public class Vendor {
 		this.products = products;
 	}
 
-	public String getVendor_image() {
-		return vendor_image;
+	public String getImage() {
+		return image;
 	}
 
-	public void setVendor_image(String vendor_image) {
-		this.vendor_image = vendor_image;
+	public void setImage(String image) {
+		this.image = image;
 	}
+
 	
 	
 }

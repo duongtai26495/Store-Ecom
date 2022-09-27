@@ -4,6 +4,9 @@
 	--background-color:#bfe9f2;
 	--background-active:#fff;
 }
+body{
+	overflow-x: hidden!important; 
+}
 a{
 	text-decoration: none!important;
 }
@@ -146,4 +149,43 @@ a{
 	border-radius:5px;
 	border:0.5px solid rgb(183 183 183 / 50%);
 	transition:.3s;
+}
+
+.upload_cate_image{
+ opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+}
+.upload_cate_image{
+	background:transparent;
+	border:unset;
+}
+
+
+.file-input label {
+	
+  display: block;
+  position: relative;
+  height: 40px;
+  background: var(--secondary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition:.3s;
+}
+.file-input label:hover{
+	scale: 1.02;
+}
+.imageName {
+  position: absolute;
+  bottom:0px;
+  left: 0px;
+  font-size: 0.85rem;
+  color: #555;
+}
+.image_select_new{
 }

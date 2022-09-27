@@ -60,7 +60,7 @@ public class StorageServiceImpl implements StorageService {
             }
 
         System.out.println("Check : "+CHECK_UPLOAD);
-
+        System.out.println("File:" +file);
         try {
             if (file.isEmpty()) {
                 throw new RuntimeException(Snippets.FAILED_STORE_EMPTY_FILE);

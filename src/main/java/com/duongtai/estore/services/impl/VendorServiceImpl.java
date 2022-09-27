@@ -70,4 +70,12 @@ public class VendorServiceImpl implements VendorService{
 		}
 		return false;
 	}
+
+	@Override
+	public Vendor findVendorById(Long id) {
+		if(vendorRepository.existsById(id)) {
+			return vendorRepository.findById(id).get();
+		}
+		return null;
+	}
 }

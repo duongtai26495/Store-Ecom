@@ -22,10 +22,7 @@
 					
 					<div th:replace="master/views/fragments/user_view::user_list_view"></div>
 					
-					<div th:if="${content == 'vendors'}" th:each="vendor : ${vendors}">
-					<span>[[${vendor.name}]]</span>
-					</div>
-					
+					<div th:replace="master/views/fragments/vendor_view::vendors"></div>
 					
 					<div th:replace="master/views/fragments/category_view::categories"></div>
 					
