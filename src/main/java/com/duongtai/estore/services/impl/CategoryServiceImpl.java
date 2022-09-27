@@ -66,9 +66,8 @@ public class CategoryServiceImpl implements CategoryService{
 		    	
 				cate_found.setName(category.getName());
 			}
-			if(!category.getCategory_dtails().isEmpty() 
-					&& !category.getCategory_dtails().strip().toLowerCase()
-					.equals(cate_found.getCategory_dtails().strip().toLowerCase())) {
+			
+			if(!category.getCategory_dtails().isEmpty()) {
 			
 				LOG.info(String.format("Admin: '%s' have changed category details from '%s' to '%s'", 
 		    			getUsernameLogin(),

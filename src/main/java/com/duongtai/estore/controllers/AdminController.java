@@ -162,13 +162,26 @@ public class AdminController {
         	
         		category.setId(Long.parseLong(cate_id));
         		categoryService.editCategoryById(category);
-        		return new ModelAndView("redirect:/master?content=categories&cate_id="+cate_id);
         	}
 		
     	return new ModelAndView("redirect:/master?content=categories&cate_id="+cate_id);
     }
     
- 
+	@PostMapping("edit_vendor/{vendor_id}")
+    public ModelAndView editVendorById(
+    		ModelMap model, 
+    		@PathVariable String vendor_id, 
+    		@ModelAttribute Vendor vendor){
+			System.out.println("Vendor: "+vendor.getImage());
+    		if(vendorService.findVendorById(Long.parseLong(vendor_id)) != null) {
+        	
+        		vendor.setVendor_id(Long.parseLong(vendor_id));
+        		vendorService.editVendorById(vendor);
+        	}
+		
+    		return new ModelAndView("redirect:/master?content=vendors&vendor_id="+vendor_id);
+    }
+    
     
     @PostMapping("delete_cate/{cate_id}")
     public ModelAndView deleteCate(ModelMap model,

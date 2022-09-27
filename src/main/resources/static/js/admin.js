@@ -1,11 +1,19 @@
 
 function uploadNewFile(file, type){
-	
-	
+	console.log("type: "+type)
+	const btn_new = $('#label_upload_new');
+	const btn_edit = $('#label_upload_edit');
+	$("#image_name_edit").text("");
 	if(file.files && file.files[0]){
-		var formdata = new FormData();
-		formdata.append("img", file.files[0]);
-		console.log(file.files[0]);
+		
+		console.log(file.files[0].size);
+		if(file.files[0].size > 500000){
+			$("#image_name").text("The image too big")
+			$("#image_name").css({"color":"red"})
+			file.files[0].remove;
+		}else{
+			var formdata = new FormData();
+			formdata.append("img", file.files[0]);
 		var requestOptions = {
 		  method: 'POST',
 		  body: formdata,
@@ -16,20 +24,36 @@ function uploadNewFile(file, type){
 		  .then(response => response.json())
 		  .then(result => {
 			if(type === 'edit'){
-				$('#image_select_edit').attr('src', '/images/'+result.data+'')
-				$('#new_item_image').attr('value',result.data)
+				
+				btn_edit.css({
+					"background-image": "url(/images/"+result.data+")",
+					"background-position": "center center",
+					"background-repeat": "no-repeat",
+					"background-size":"cover",
+					"background-color":"unset"})
+				$("#image_name_edit").text("")
+				$('#edit_item_image').attr('value',result.data)
+				console.log(result.data);
+				
 			}
 			if(type === 'new'){
-				$('#image_select_new').attr('src', '/images/'+result.data+'')
+				btn_new.css({
+					"background-image": "url(/images/"+result.data+")",
+					"background-position": "center center",
+					"background-repeat": "no-repeat",
+					"background-size":"cover",
+					"background-color":"unset"})
+				$("#image_name").text("")
 				$('#new_item_image').attr('value',result.data)
 				console.log(result.data);
 			}
-			
+			file.files[0].remove;
 			
 			})
 		  .catch(error => console.log('error', error));
 			}
-			
+		}
+		
 	
 }
 

@@ -3,6 +3,7 @@
 	--secondary-color: rgb(0, 255, 255);
 	--background-color:#bfe9f2;
 	--background-active:#fff;
+	--background-main:rgba(200,200,200,1);
 }
 body{
 	overflow-x: hidden!important; 
@@ -151,12 +152,7 @@ a{
 	transition:.3s;
 }
 
-.upload_cate_image{
- opacity: 0;
-  width: 0.1px;
-  height: 0.1px;
-  position: absolute;
-}
+
 .upload_cate_image{
 	background:transparent;
 	border:unset;
@@ -167,7 +163,7 @@ a{
 	
   display: block;
   position: relative;
-  height: 40px;
+  height:200px;
   background: var(--secondary-color);
   display: flex;
   align-items: center;
@@ -187,5 +183,48 @@ a{
   font-size: 0.85rem;
   color: #555;
 }
-.image_select_new{
+.items_list{
+	border-radius:7px;
+}
+.item_avt{
+	height:100px;
+	width:100px!important;    
+	background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius:5px;
+}
+.item_details{
+	padding-left:5px;
+    justify-content: center;
+}
+.item_name{
+	font-size:25px;
+	color:black;
+}
+.item_content{
+	color:black;
+	font-size:13px;
+}
+.border-5{
+	border-radius:5px!important;
+}
+.shadow_box{
+    box-shadow: 3px 3px 7px 3px #e5e5e5;
+}
+.item_row:hover{
+	transition:.3s;
+    box-shadow: 0 0 0px 1px #e5e5e5;
+}
+.input_upload_image{
+ opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+}
+#label_upload_edit{
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: unset;
 }

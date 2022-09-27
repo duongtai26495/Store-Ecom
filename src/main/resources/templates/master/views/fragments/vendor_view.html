@@ -9,40 +9,59 @@
 	<div class="col-12 d-flex flex-row">
 		<div class="col-12 col-md-6">
 			<!-- Vendor List -->
-			<div class="col-12 items_list">
-				<a th:href="@{/edit_vendor/}+${vendor.vendor_id}" class="col-12 item_row d-flex flex-row" th:each="vendor : ${vendors}">
-					<img class="col-2 item_avt" th:src="@{/images/}+${vendor.image}" />
-					<div class="item_details col-12 d-flex flex-column" >
-						<span class="">[[${vendor.name}]]</span>
-						<span class="">[[${vendor.last_edited}]]</span>
+			<div class="col-12 items_list bg-white shadow_box p-2">
+				<a th:href="@{master?content=vendors&vendor_id=}+${vendor.vendor_id}" 
+				class="mt-2 p-2 col-12 item_row border-5 d-flex flex-row" th:each="vendor : ${vendors}">
+					<div class="col-2 item_avt" th:style="'background-image:url(/images/'+${vendor.image}+');'"></div>
+					<div class="item_details col-12 col-md-8 d-flex flex-column" >
+						<span class="item_name">[[${vendor.name}]]</span>
+						<span class="item_content">[[${vendor.last_edited}]]</span>
 					</div>
 				</a>
 			</div>
 		</div>
-		<div class="col-12 col-md-4">
+		<div class="col-12 col-md-5 ms-3">
 		
-			<div class="col-12">
+			<div th:if="${edit_vendor}" class="col-12">
 			<!-- Details -->
+			<div class="col-6 p-3 border-5 shadow_box bg-white">
+				<form class="form-group" th:object="${edit_vendor}" th:action="@{/master/edit_vendor/}+${edit_vendor.vendor_id}" method="POST">
+					<label for="vendor_name">Vendor name</label>
+					<input id="vendor_name" name="name" type="text" th:value="${edit_vendor.name}" class="col-12 mt-2 form-control"/>
+					<div class="file-input col-12">
+					<input class="form-control" hidden type="text" name="image" id="edit_item_image"/>
+					<input class="form-control file-input input_upload_image" type="file" name="img" id="button_upload_edit" 
+					value="Upload Image" onchange="uploadNewFile(this,'edit')"/>
+					<label class="mt-2 border-5 col-12 label-upload" id="label_upload_edit"  
+					th:style="'background-image:url(/images/'+${edit_vendor.image}+');'" 
+					for="button_upload_edit">
+						<span id="image_name_edit"></span>
+					</label>
+					</div>
+					
+					<input class="btn col-12 bg-success mt-2 text-white" type="submit" name="submit" value="Save"/>
+				</form>
 			</div>
 			
-			<div class="col-12">
+			</div>
+			
+			<div class="col-12 mt-2">
 			<!-- Create new -->
 			
-			<div class="col-6 p-3 bg-white">
+			<div class="col-6 p-3 border-5 shadow_box bg-white">
 				<form class="form-group" th:object="${vendor}" th:action="@{/master/add_vendor}" method="POST">
 					<label for="vendor_name">Vendor name</label>
 					<input id="vendor_name" name="name" type="text" class="col-12 mt-2 form-control"/>
 					<div class="file-input col-12">
 					<input class="form-control" hidden type="text" name="image" id="new_item_image"/>
-					<input class="form-control file-input upload_cate_image" type="file" name="img" id="new_upload_image" 
+					<input class="form-control file-input input_upload_image" type="file" name="img" id="new_upload_image" 
 					value="Upload Image" onchange="uploadNewFile(this,'new')"/>
-					<img class="col-12 mt-2 image_select_new" id="image_select_new" />
-					<label class="col-12 label-upload"  for="new_upload_image">
+					<label class=" mt-2 border-5 col-12 label-upload"  id="label_upload_new"  for="new_upload_image">
 						<span id="image_name">Upload image</span>
 					</label>
 					</div>
 					
-					<input class="btn col-12 bg-danger mt-2 text-white" type="submit" name="submit" value="Save"/>
+					<input class="btn col-12 bg-success mt-2 text-white" type="submit" name="submit" value="Create"/>
 				</form>
 			</div>
 			</div>
