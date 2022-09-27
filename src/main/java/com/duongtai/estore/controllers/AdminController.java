@@ -80,7 +80,10 @@ public class AdminController {
 			if(cate_id != null) {
 			model.addAttribute("edit_category", categoryService.findCategoryById(Long.parseLong(cate_id)));
 			}else {
-			model.addAttribute("edit_category", categoryService.findAllCategory().get(0));
+			
+			model.addAttribute("edit_category", categoryService.findAllCategory().size() > 0 
+					? categoryService.findAllCategory().get(0) 
+							: new Category());
 			}
 			model.addAttribute("categories", categoryService.findAllCategory());
 			break;
