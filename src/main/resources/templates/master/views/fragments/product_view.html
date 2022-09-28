@@ -8,7 +8,7 @@
 
 <div th:if="${content == 'products'}"  th:fragment="product_list">
 	<div class="col-12 d-flex flex-row">
-		<div class="col-12 col-md-5">
+		<div class="col-12 col-md-4">
 			<div class="col-12 wrapper_items_list bg-white p-2 shadow-box">
 				<a th:href="@{/master?content=products&edit_product/}+${product.id}" class="col-12 p-2 border-5 product_row bg-white item-row" th:each="product : ${products}">
 					<p class="heading">[[${product.name}]]</p>
@@ -23,12 +23,12 @@
 		</div>
 		
 		<div class="col-12 ms-1 col-md-7 d-flex flex-row">
-			<div class="col-5 p-3 border-5 shadow_box bg-white">
+			<div class="col-12 col-md-5 p-3 border-5 shadow_box bg-white">
 				<form class="col-12 form-group" th:object="${product}" th:action="@{/master/add_product}" method="POST">
 					<label for="p_name">Product name</label>
 					<input id="p_name" name="name" type="text" th:value="${product.name}" class="col-12 mt-2 form-control"/>
 					<label for="p_note">Category details</label>
-					<textarea rows="3" cols="20" id="p_note" class="form-control" 
+					<textarea rows="3" cols="20" id="p_note" class="col-12" 
 					th:value="${product.product_note}" 
 					name="product_note" 
 					placeholder="Detail">[[${product.product_note}]]</textarea>
@@ -55,12 +55,7 @@
 						<span id="image_name">Upload image</span>
 					</label>
 					<input class="form-control" hidden type="text" name="product_images" id="new_item_image"/>
-					<input class="form-control file-input input_upload_image" type="file" name="img" id="new_upload_image" 
-					value="Upload Image" onchange="uploadNewFile(this,'new')"/>
 					
-				<!-- 	<label class="btn mt-2 border-5 col-12 label-upload"  id="label_upload_new"  for="new_upload_image">
-						<span id="image_name">Upload image</span>
-					</label> -->
 					<button type="button" id="select_img" onclick="getAll()" class="btn btn-primary mt-2 col-12">Select image</button>
 					
 					
