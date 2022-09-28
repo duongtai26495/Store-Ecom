@@ -243,6 +243,7 @@ public class AdminController {
     		@ModelAttribute Product product) {
     	LOG.info("ADMIN: "+getUsernameLogin() + " added a categories "+product.getName());
     	if(product!= null) {
+    		System.out.println("IMAGES: "+product.getProduct_images());
     		productService.saveProduct(product);
     	}
     	return new ModelAndView("redirect:/master?content=products");

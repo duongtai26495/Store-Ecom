@@ -1,5 +1,5 @@
 const alls = []
-var images = new String();
+const images = new Array()
 const view_all = $('#all_image_product');
 
 function uploadNewFile(file, type){
@@ -61,10 +61,11 @@ function uploadNewFile(file, type){
 }
 
  function getAll(){
+$('#show_all_images').toggle(()=>
 $('#show_all_images').css({
-	'transition':'1s',
+	'transition':'.3s',
 	'width':'auto'
-})
+}))
 alls.length = 0;
 $('#all_image_product').empty()
 let url = "/master/all_images";
@@ -77,15 +78,20 @@ var requestOptions = {
   .then(result => {
 		alls.push(...result.data)
 		alls.forEach((image)=>{
-			$('#all_image_product').append("<img onclick=selectImages('"+image.name+"') class='border-5 image_row' style=background-image:url(/images/"+image.name+"); />");
+			$('#all_image_product').append("<img onclick=selectImages('"+image.id+"','"+image.name+ "') class='border-5 image_row' style=background-image:url(/images/"+image.name+"); />");
 		})
 	
 	}).catch(error => console.log('error', error));
   
 }
 
-function selectImages(filename){
-	images += filename+","
-	console.log(images)
-	$('#new_item_image').attr('value',images);
+function selectImages(id, name){
+	if(!images.includes(id)){
+		images.push(id)
+		console.log(name)
+		$('#selected_image').append("<img class='border-5 image_row' style=background-image:url(/images/"+name+"); />");
+			
+		$('#new_item_image').attr('value',images);
+	}
+	
 }

@@ -46,7 +46,9 @@ public class Product {
 	
 	private String last_edited;
 	
-	private String product_images;
+	@ManyToMany
+	@JoinTable(name = "product_image", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name ="image_id"))
+	private List<Image> product_images;
 	
 	@ManyToMany(mappedBy = "products")
 	private List<Order> orders;
@@ -134,11 +136,12 @@ public class Product {
 		this.last_edited = last_edited;
 	}
 
-	public String getProduct_images() {
+
+	public List<Image> getProduct_images() {
 		return product_images;
 	}
 
-	public void setProduct_images(String product_images) {
+	public void setProduct_images(List<Image> product_images) {
 		this.product_images = product_images;
 	}
 

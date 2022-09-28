@@ -25,6 +25,9 @@ public class Image {
 	
 	private String added_by;
 	
+	@ManyToMany(mappedBy = "product_images")
+	private List<Product> products;
+	
 	public Image() {
 		super();
 	}
