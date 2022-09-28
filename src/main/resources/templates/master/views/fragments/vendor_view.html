@@ -7,25 +7,37 @@
 <body>
 <div class="vendor_list col-12 flex-row d-flex" th:if="${content == 'vendors'}"  th:fragment="vendors">
 	<div class="col-12 d-flex flex-row">
-		<div class="col-12 col-md-6">
+		<div class="col-12 col-md-7">
 			<!-- Vendor List -->
-			<div class="col-12 items_list bg-white shadow_box p-2">
-				<a th:href="@{master?content=vendors&vendor_id=}+${vendor.vendor_id}" 
-				class="mt-2 p-2 col-12 item_row border-5 d-flex flex-row" th:each="vendor : ${vendors}">
+			<div class="col-12 border-5 items_list bg-white shadow_box p-2">
+				<div class="mt-2 p-2 d-flex flex-row col-12 item_row border-5 " th:each="vendor : ${vendors}">
+					<a class="col-10 d-flex flex-row" th:href="@{master?content=vendors&vendor_id=}+${vendor.vendor_id}" >
+					
 					<div class="col-2 item_avt" th:style="'background-image:url(/images/'+${vendor.image}+');'"></div>
 					<div class="item_details col-12 col-md-8 d-flex flex-column" >
 						<span class="item_name">[[${vendor.name}]]</span>
 						<span class="item_content">[[${vendor.last_edited}]]</span>
 					</div>
-				</a>
+					</a>
+					<div class="col-2 m-auto">
+					<form class="form-group col-12" method="POST" th:action="@{/master/delete_vendor/}+${vendor.vendor_id}">
+						<input class="form-control btn btn-primary col-12" type=submit value="Hidden" />
+					</form>
+					<form class="mt-2 " method="POST" th:action="@{/master/delete_vendor/}+${vendor.vendor_id}">
+						<input class="btn btn-warning col-12" type=submit value="Delete" />
+					</form>
+					
+					</div>
+				</div>
+				
 			</div>
 		</div>
 		<div class="col-12 col-md-5 ms-3">
 		
-			<div th:if="${edit_vendor}" class="col-12">
+			<div th:if="${edit_vendor.vendor_id}" class="col-12">
 			<!-- Details -->
-			<div class="col-6 p-3 border-5 shadow_box bg-white">
-				<form class="form-group" th:object="${edit_vendor}" th:action="@{/master/edit_vendor/}+${edit_vendor.vendor_id}" method="POST">
+			<div class="col-12 p-3 border-5 shadow_box bg-white">
+				<form class="form-group edit_item" th:object="${edit_vendor}" th:action="@{/master/edit_vendor/}+${edit_vendor.vendor_id}" method="POST">
 					<label for="vendor_name">Vendor name</label>
 					<input id="vendor_name" name="name" type="text" th:value="${edit_vendor.name}" class="col-12 mt-2 form-control"/>
 					<div class="file-input col-12">
@@ -48,7 +60,7 @@
 			<div class="col-12 mt-2">
 			<!-- Create new -->
 			
-			<div class="col-6 p-3 border-5 shadow_box bg-white">
+			<div class="col-12 p-3 border-5 shadow_box bg-white">
 				<form class="form-group" th:object="${vendor}" th:action="@{/master/add_vendor}" method="POST">
 					<label for="vendor_name">Vendor name</label>
 					<input id="vendor_name" name="name" type="text" class="col-12 mt-2 form-control"/>

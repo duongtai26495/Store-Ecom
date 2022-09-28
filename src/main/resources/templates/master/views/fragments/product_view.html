@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<div th:if="${content == 'products'}"  th:fragment="product_list">
+	<div class="col-12 d-flex flex-row">
+		<div class="col-12 col-md-5">
+			
+		</div>
+		
+		<div class="col-12 col-md-7 d-flex flex-row">
+			<div class="col-5 p-3 border-5 shadow_box bg-white">
+				<form class="form-group" th:object="${product}" th:action="@{/master/add_product}" method="POST">
+					<label for="p_name">Product name</label>
+					<input id="p_name" name="name" type="text" th:value="${product.name}" class="col-12 mt-2 form-control"/>
+					<label for="p_note">Category details</label>
+					<textarea rows="3" cols="20" id="p_note" class="form-control" 
+					th:value="${product.product_note}" 
+					name="product_note" 
+					placeholder="Detail">[[${product.product_note}]]</textarea>
+					<select class="form-control mt-2" id="sort" name="category">
+							<option hidden >Category</option>
+				            <option class="col-12" th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}"></option>
+			        </select>
+			        
+			        <select class="form-control mt-2" id="vendor" name="vendor">
+							<option hidden >Vendor</option>
+				            <option class="col-12" th:each="vendor : ${vendors}" th:text="${vendor.name}" th:value="${vendor.vendor_id}"></option>
+			        </select>
+			        <input class="font-control col-12 mt-2" type="number" name="quantity" value="${product.quantity}"/>
+					<div class="file-input col-12">
+					
+					<input class="form-control" hidden type="text" name="product_images" id="new_item_image"/>
+					<input class="form-control file-input input_upload_image" type="file" name="img" id="new_upload_image" 
+					value="Upload Image" onchange="uploadNewFile(this,'new')"/>
+					
+				<!-- 	<label class="btn mt-2 border-5 col-12 label-upload"  id="label_upload_new"  for="new_upload_image">
+						<span id="image_name">Upload image</span>
+					</label> -->
+					<button type="button" id="select_img" onclick="getAll()" class="btn btn-primary mt-2 col-12">Select image</button>
+					
+					
+					</div>
+					<input class="btn col-12 bg-success mt-2 text-white" type="submit" name="submit" value="Create"/>
+				</form>
+			</div>
+			<div class="col-7 border-5 shadow_box bg-white" id="show_all_images">
+			<div id="all_image_product" class="images_list col-12 p-2 d-flex flex-row flex-wrap justify-content-center">
+			<input class="form-control file-input input_upload_image" type="file" name="img" id="new_upload_image" 
+			value="Upload Image" onchange="uploadNewFile(this,'new')"/>
+			
+			<label class="btn mt-2 border-5label-upload"  id="label_upload_new"  for="new_upload_image">
+				<span id="image_name">Upload image</span>
+			</label>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

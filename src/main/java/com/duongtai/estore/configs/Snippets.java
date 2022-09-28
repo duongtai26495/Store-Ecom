@@ -63,4 +63,7 @@ public class Snippets {
     public static final String CREATED_AT = "Created at";
     public static final String A_Z = "A -> Z";
     public static final String Z_A = "Z -> A";
+
+    //image
+    public static final String NONAME = "noname";
 }

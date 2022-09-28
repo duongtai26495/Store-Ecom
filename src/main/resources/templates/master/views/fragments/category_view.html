@@ -8,9 +8,9 @@
 <div class="cate_list col-12 flex-row d-flex" th:if="${content == 'categories'}"  th:fragment="categories">	
 		
 		<div class="col-12 d-flex flex-row">
-		<div class="col-12 col-md-6">
+		<div class="col-12 col-md-7">
 			<!-- Vendor List -->
-			<div class="col-12 items_list bg-white shadow_box p-2">
+			<div class="col-12 border-5 items_list bg-white shadow_box p-2">
 				<a th:href="@{master?content=categories&cate_id=}+${category.id}" 
 				class="mt-2 p-2 col-12 item_row border-5 d-flex flex-row" th:each="category : ${categories}">
 					<div class="col-2 item_avt" th:style="'background-image:url(/images/'+${category.image}+');'"></div>
@@ -19,6 +19,15 @@
 						<span class="item_content">[(${category.category_dtails})]</span>
 						<span class="item_content">[[${category.last_edited}]]</span>
 					</div>
+					<div class="col-2 m-auto">
+					<form class="form-group col-12" method="POST" th:action="@{/master/hidden_category/}+${category.id}">
+						<input class="form-control btn btn-primary col-12" type=submit value="Hidden" />
+					</form>
+					<form class="mt-2 " method="POST" th:action="@{/master/delete_cate/}+${category.id}">
+						<input class="btn btn-warning col-12" type=submit value="Delete" />
+					</form>
+					
+					</div>
 				</a>
 			</div>
 		</div>
@@ -26,8 +35,8 @@
 		
 			<div th:if="${edit_category}" class="col-12">
 			<!-- Details -->
-			<div class="col-6 p-3 border-5 shadow_box bg-white">
-				<form class="form-group" th:object="${edit_category}" th:action="@{/master/edit_cate/}+${edit_category.id}" method="POST">
+			<div class="col-12 p-3 border-5 shadow_box bg-white">
+				<form class="form-group edit_item" th:object="${edit_category}" th:action="@{/master/edit_cate/}+${edit_category.id}" method="POST">
 					<label for="cate_name">Category name</label>
 					<input id="cate_name" name="name" type="text" th:value="${edit_category.name}" class="col-12 mt-2 form-control"/>
 					<label for="cate_details">Category details</label>
@@ -53,7 +62,7 @@
 			<div class="col-12 mt-2">
 			<!-- Create new -->
 			
-			<div class="col-6 p-3 border-5 shadow_box bg-white">
+			<div class="col-12 p-3 border-5 shadow_box bg-white">
 				<form class="form-group" th:object="${category}" th:action="@{/master/save_cate}" method="POST">
 					<label for="cate_name">Category name</label>
 					<input id="cate_name" name="name" type="text" th:value="${category.name}" class="col-12 mt-2 form-control"/>

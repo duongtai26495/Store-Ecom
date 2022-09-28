@@ -158,12 +158,14 @@ a{
 	border:unset;
 }
 
+.edit_item .file-input label{
+	height:400px;
+}
 
 .file-input label {
-	
   display: block;
   position: relative;
-  height:200px;
+  height:50px;
   background: var(--secondary-color);
   display: flex;
   align-items: center;
@@ -182,9 +184,6 @@ a{
   left: 0px;
   font-size: 0.85rem;
   color: #555;
-}
-.items_list{
-	border-radius:7px;
 }
 .item_avt{
 	height:100px;
@@ -227,4 +226,26 @@ a{
     background-repeat: no-repeat;
     background-size: cover;
     background-color: unset;
+}
+.image_row{
+	width:100px!important;
+	height:100px;
+	margin:5px;
+	background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: unset;
+}
+
+#show_all_images{
+	width:0px;
+	transition:1s;
+}
+.selected{
+    border: 1px solid var(--primary-color);
+}
+#label_upload_new{
+	width:100px;
+	height:100px;
+	border:1px solid rgba(150,150,150,1);
 }

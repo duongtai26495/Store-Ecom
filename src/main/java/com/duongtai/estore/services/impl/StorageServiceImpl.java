@@ -33,6 +33,9 @@ public class StorageServiceImpl implements StorageService {
     @Autowired
     private UserServiceImpl userService;
 
+    @Autowired
+    private ImageServiceImpl imageService;
+    
     public StorageServiceImpl() {
         try {
             Files.createDirectories(storageFolder);
@@ -52,7 +55,7 @@ public class StorageServiceImpl implements StorageService {
     public String storeFile(MultipartFile file, String username) {
             int CHECK_UPLOAD = 0;
 
-            if(username.equals("noname")){
+            if(username.equals(Snippets.NONAME)){
                 CHECK_UPLOAD = 1;
             }
             else if(username.equals(getUsernameLogin())){
@@ -94,6 +97,7 @@ public class StorageServiceImpl implements StorageService {
                 }
 
                 if (CHECK_UPLOAD == 1){
+                	imageService.saveImageWithName(generatedFileName);
                     return generatedFileName;
 
                 }

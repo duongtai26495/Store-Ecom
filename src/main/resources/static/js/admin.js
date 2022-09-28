@@ -1,3 +1,6 @@
+const alls = []
+var images = new String();
+const view_all = $('#all_image_product');
 
 function uploadNewFile(file, type){
 	console.log("type: "+type)
@@ -37,24 +40,52 @@ function uploadNewFile(file, type){
 				
 			}
 			if(type === 'new'){
-				btn_new.css({
+/*				btn_new.css({
 					"background-image": "url(/images/"+result.data+")",
 					"background-position": "center center",
 					"background-repeat": "no-repeat",
 					"background-size":"cover",
-					"background-color":"unset"})
-				$("#image_name").text("")
+					"background-color":"unset",
+					"height":"350px"}) 
+				$("#image_name").text("") */
 				$('#new_item_image').attr('value',result.data)
+				getAll()
 				console.log(result.data);
 			}
 			file.files[0].remove;
-			
 			})
 		  .catch(error => console.log('error', error));
 			}
 		}
 		
-	
 }
 
+ function getAll(){
+$('#show_all_images').css({
+	'transition':'1s',
+	'width':'auto'
+})
+alls.length = 0;
+$('#all_image_product').empty()
+let url = "/master/all_images";
+var requestOptions = {
+  method: 'GET',
+  redirect: 'follow'
+};
+ fetch(url, requestOptions)
+  .then(response => response.json())
+  .then(result => {
+		alls.push(...result.data)
+		alls.forEach((image)=>{
+			$('#all_image_product').append("<img onclick=selectImages('"+image.name+"') class='border-5 image_row' style=background-image:url(/images/"+image.name+"); />");
+		})
+	
+	}).catch(error => console.log('error', error));
+  
+}
 
+function selectImages(filename){
+	images += filename+","
+	console.log(images)
+	$('#new_item_image').attr('value',images);
+}

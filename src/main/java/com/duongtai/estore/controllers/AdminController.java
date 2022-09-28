@@ -33,11 +33,14 @@ import com.duongtai.estore.configs.CustomAccessDeniedHandler;
 import com.duongtai.estore.configs.Snippets;
 import com.duongtai.estore.entities.Category;
 import com.duongtai.estore.entities.ConvertEntity;
+import com.duongtai.estore.entities.Image;
+import com.duongtai.estore.entities.Product;
 import com.duongtai.estore.entities.ResponseObject;
 import com.duongtai.estore.entities.User;
 import com.duongtai.estore.entities.UserDTO;
 import com.duongtai.estore.entities.Vendor;
 import com.duongtai.estore.services.impl.CategoryServiceImpl;
+import com.duongtai.estore.services.impl.ImageServiceImpl;
 import com.duongtai.estore.services.impl.OrderServiceImpl;
 import com.duongtai.estore.services.impl.ProductServiceImpl;
 import com.duongtai.estore.services.impl.StorageServiceImpl;
@@ -67,6 +70,9 @@ public class AdminController {
 	@Autowired
 	private StorageServiceImpl storageService;
 	
+	@Autowired
+	private ImageServiceImpl imageService;
+	
 	@GetMapping("")
 	public ModelAndView home(ModelMap model, 
 			@PathParam("content") String content,
@@ -81,6 +87,9 @@ public class AdminController {
 			model.addAttribute("orders",orderService.findAllOrder());	
 			break;
 		case "products":
+			model.addAttribute("product",new Product());
+			model.addAttribute("vendors", vendorService.findAllVendor());
+			model.addAttribute("categories", categoryService.findAllCategory());
 			model.addAttribute("products", productService.findAllProduct());	
 			break;
 		case "users":
@@ -116,6 +125,7 @@ public class AdminController {
 			username = getUsernameLogin();
 		}
 		
+		model.addAttribute("all_images", imageService.getAllImage());
 		model.addAttribute("title", "Admin - Home");
 		model.addAttribute("category", new Category());
 		model.addAttribute("vendor", new Vendor());
@@ -183,14 +193,7 @@ public class AdminController {
     }
     
     
-    @PostMapping("delete_cate/{cate_id}")
-    public ModelAndView deleteCate(ModelMap model,
-    		@PathVariable String cate_id) {
-    	if(categoryService.findCategoryById(Long.parseLong(cate_id)) != null) {
-    		categoryService.deleteCategoryById(Long.parseLong(cate_id));
-    	}
-    	return new ModelAndView("redirect:/master?content=categories");	
-    }
+   
     
     @PostMapping("uploadImage")
     public ResponseEntity<ResponseObject> uploadImage(@RequestParam("img") MultipartFile file){
@@ -214,5 +217,43 @@ public class AdminController {
     		vendorService.saveVendor(vendor);
     	}
     	return new ModelAndView("redirect:/master?content=vendors");
+    }
+    
+    @PostMapping("delete_cate/{cate_id}")
+    public ModelAndView deleteCate(ModelMap model,
+    		@PathVariable String cate_id) {
+    	if(categoryService.findCategoryById(Long.parseLong(cate_id)) != null) {
+    		categoryService.deleteCategoryById(Long.parseLong(cate_id));
+    	}
+    	return new ModelAndView("redirect:/master?content=categories");	
+    }
+    
+    @PostMapping("delete_vendor/{vendor_id}")
+    public ModelAndView delete_vendor(ModelMap model, 
+    		@PathVariable String vendor_id) {
+    	LOG.info("ADMIN: "+getUsernameLogin() + " added a delete "+vendor_id);
+    	if(vendorService.findVendorById(Long.parseLong(vendor_id))!=null){
+    		vendorService.deleteVendorById(Long.parseLong(vendor_id));
+    	}
+    	return new ModelAndView("redirect:/master?content=vendors");
+    }
+    
+    @PostMapping("add_product")
+    public ModelAndView add_product(ModelMap model, 
+    		@ModelAttribute Product product) {
+    	LOG.info("ADMIN: "+getUsernameLogin() + " added a categories "+product.getName());
+    	if(product!= null) {
+    		productService.saveProduct(product);
+    	}
+    	return new ModelAndView("redirect:/master?content=products");
+    }
+    
+    @GetMapping("all_images")
+    public ResponseEntity<ResponseObject> getAll(){
+    	List<Image> list = imageService.getAllImage();
+    	return ResponseEntity.status(HttpStatus.OK).body(
+    			new ResponseObject(Snippets.SUCCESS, Snippets.UPLOAD_IMAGE_SUCCESS, list)
+    			);
+
     }
 }

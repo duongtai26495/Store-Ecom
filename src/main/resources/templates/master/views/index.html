@@ -10,15 +10,13 @@
 	<div class="col-12 dashboard_main">
 		<div th:replace="master/views/fragments/fragments::header_nav">
 		</div>
-		<div class="d-flex col-12">
+		<div class="d-flex col-8">
 			<div class="p-5 col-12">
 				<div th:if="${content == 'dashboard'}" th:each="order : ${orders}">
 					<span>[[${order.id}]]</span>
 					</div>
 				
-					<div th:if="${content == 'products'}" th:each="product : ${products}">
-					
-					</div>
+					<div th:replace="master/views/fragments/product_view::product_list"></div>
 					
 					<div th:replace="master/views/fragments/user_view::user_list_view"></div>
 					

@@ -33,9 +33,8 @@ public class ProductServiceImpl implements ProductService {
 	        product.setCreated_at(sdf.format(date));
 	        product.setLast_edited(sdf.format(date));
 	        product.setAdded_by(getUsernameLogin());
-	        if(productRepository.save(product) != null) {
-	        	return product;
-	        }
+			productRepository.save(product);
+			return product;
 		}
 		return null;
 	}
@@ -47,8 +46,8 @@ public class ProductServiceImpl implements ProductService {
 							.equals(p_found.getName().toLowerCase().strip())) {
 			return null;
 		}
-		if(p_found!=null && product.getName().toLowerCase().strip()
-							.equals(p_found.getName().toLowerCase().strip())) {
+		if(product.getName().toLowerCase().strip()
+									.equals(p_found.getName().toLowerCase().strip())) {
 			
 				Date date = new Date();
 		        SimpleDateFormat sdf = new SimpleDateFormat(Snippets.TIME_PATTERN);

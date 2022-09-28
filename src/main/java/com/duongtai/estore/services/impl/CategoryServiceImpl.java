@@ -32,12 +32,11 @@ public class CategoryServiceImpl implements CategoryService{
 	        category.setCreated_at(sdf.format(date));
 	        category.setLast_edited(sdf.format(date));
 	        category.setCreated_by(getUsernameLogin());
-	        if(categoryRepository.save(category) != null) {
-	        	LOG.info(String.format("Admin: '%s' have create new category name '%s' successfully", 
-		    			getUsernameLogin(),
-		    			category.getName()));
-	        	return category;
-	        }	
+			categoryRepository.save(category);
+			LOG.info(String.format("Admin: '%s' have create new category name '%s' successfully",
+					getUsernameLogin(),
+					category.getName()));
+			return category;
 		}
 		LOG.info(String.format("Admin: '%s' have create new category name '%s' failed", 
     			getUsernameLogin(),
@@ -56,8 +55,8 @@ public class CategoryServiceImpl implements CategoryService{
 			}
 			
 			if(!category.getName().isEmpty() 
-					&& !category.getName().strip().toLowerCase()
-					.equals(cate_found.getName().strip().toLowerCase())) {
+					&& !category.getName().trim().toLowerCase()
+					.equals(cate_found.getName().trim().toLowerCase())) {
 		    	
 		    	LOG.info(String.format("Admin: '%s' have changed category name from '%s' to '%s'", 
 		    			getUsernameLogin(),
@@ -87,9 +86,8 @@ public class CategoryServiceImpl implements CategoryService{
 			Date date = new Date();
 	        SimpleDateFormat sdf = new SimpleDateFormat(Snippets.TIME_PATTERN);
 	        category.setLast_edited(sdf.format(date));
-	        if(categoryRepository.save(cate_found)!=null) {
-	        	return cate_found;
-	        };
+			categoryRepository.save(cate_found);
+			return cate_found;
 		}
 		return saveCategory(category);
 	}
