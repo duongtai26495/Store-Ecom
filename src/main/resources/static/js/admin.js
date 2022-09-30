@@ -2,6 +2,8 @@ const alls = []
 const images = new Array()
 const view_all = $('#all_image_product');
 
+
+//upload image 
 function uploadNewFile(file, type){
 	console.log("type: "+type)
 	const btn_new = $('#label_upload_new');
@@ -27,27 +29,12 @@ function uploadNewFile(file, type){
 		  .then(response => response.json())
 		  .then(result => {
 			if(type === 'edit'){
-				
-				btn_edit.css({
-					"background-image": "url(/images/"+result.data+")",
-					"background-position": "center center",
-					"background-repeat": "no-repeat",
-					"background-size":"cover",
-					"background-color":"unset"})
-				$("#image_name_edit").text("")
 				$('#edit_item_image').attr('value',result.data)
 				console.log(result.data);
 				
 			}
 			if(type === 'new'){
-/*				btn_new.css({
-					"background-image": "url(/images/"+result.data+")",
-					"background-position": "center center",
-					"background-repeat": "no-repeat",
-					"background-size":"cover",
-					"background-color":"unset",
-					"height":"350px"}) 
-				$("#image_name").text("") */
+
 				$('#new_item_image').attr('value',result.data)
 				getAll()
 				console.log(result.data);
@@ -60,12 +47,9 @@ function uploadNewFile(file, type){
 		
 }
 
- function getAll(){
-$('#show_all_images').toggle(()=>
-$('#show_all_images').css({
-	'transition':'.3s',
-	'width':'auto'
-}))
+//get all image from db
+function getAll(){
+$('#show_all_images').toggleClass("show")
 alls.length = 0;
 $('#all_image_product').empty()
 let url = "/master/all_images";
@@ -78,20 +62,33 @@ var requestOptions = {
   .then(result => {
 		alls.push(...result.data)
 		alls.forEach((image)=>{
-			$('#all_image_product').append("<img onclick=selectImages('"+image.id+"','"+image.name+ "') class='border-5 image_row' style=background-image:url(/images/"+image.name+"); />");
+			$('#all_image_product').append("<div onclick=selectImages('"+image.id+"','"+image.name+ "') class='border-5 image_row' style=background-image:url(/images/"+image.name+"); ></div>");
 		})
 	
 	}).catch(error => console.log('error', error));
   
 }
-
+//push images into select and input
 function selectImages(id, name){
+	
 	if(!images.includes(id)){
 		images.push(id)
 		console.log(name)
-		$('#selected_image').append("<img class='border-5 image_row' style=background-image:url(/images/"+name+"); />");
+		$('#selected_image').append("<div class='border-5 image_row' style=background-image:url(/images/"+name+"); ></div>");
 			
-		$('#new_item_image').attr('value',images);
 	}
 	
 }
+
+
+//open menu product
+
+
+$('#btn_open_new_p').click(()=>{
+	 $('#new_p_panel').toggleClass("open");
+})
+
+//open left menu
+$('#open_menu_left').click(()=>{
+	$('#left-menu').toggleClass("open-menu")
+})

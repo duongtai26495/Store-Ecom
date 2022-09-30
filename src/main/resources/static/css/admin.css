@@ -5,6 +5,9 @@
 	--background-active:#fff;
 	--background-main:rgba(200,200,200,1);
 }
+.bg-smoke{
+	background-color:rgba(160,160,160,1)!important;
+}
 body{
 	overflow-x: hidden!important; 
 }
@@ -28,7 +31,7 @@ a{
 	color:black;
 	text-decoration: none;
 	font-weight: bold;
-	font-size:1.2rem;
+	font-size:1rem;
 }
 .user_list .avatar, .cate-row .avatar{
 	margin-right:1rem;
@@ -208,12 +211,15 @@ a{
 .border-5{
 	border-radius:5px!important;
 }
+.rounded-5{
+	border-radius:5px!important;
+}
 .shadow_box{
     box-shadow: 3px 3px 7px 3px #e5e5e5;
 }
 .item_row:hover{
 	transition:.3s;
-    box-shadow: 0 0 0px 1px #e5e5e5;
+    box-shadow: 3px 3px 7px 3px #e5e5e5;
 }
 .input_upload_image{
  opacity: 0;
@@ -238,7 +244,7 @@ a{
 }
 
 #show_all_images{
-	width:0px;
+	display:none;
 	transition:1s;
 }
 .selected{
@@ -249,4 +255,99 @@ a{
 }
 .images_list{
     max-width: 240px;
+}
+.product_card{
+	height:300px;
+	margin:5px 5px;
+	overflow:hidden; 
+	width:20%;
+    border: 1px solid #e7e7e7;
+}
+
+.image_product_card{
+	height:200px;
+	background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: unset;
+}
+.p_card_info{
+	
+}
+.p_heading{
+	font-size:20px;
+	color:black;
+}
+.p_cate{
+	font-size:13px;
+}
+.p_vendor{
+	font-size:13px;
+}
+.p_details{
+	position: absolute;
+	bottom:0;
+	left:0;
+	z-index: 99;
+	width:100%;
+    justify-content: space-between;
+}
+#submenu-product{
+	transition:.3s;
+	display:none;
+}
+#new_p_panel{
+	display:none;
+	overflow: hidden;
+	position:fixed;
+	top:10%;;
+	right:1rem;
+}
+.open{
+	display:flex!important;
+	overflow: visible;
+}
+.open-menu{
+	width:150px!important;
+}
+.show{
+	transition:.3s;
+	display:block!important;
+}
+#btn_p_menu:hover #submenu-product{
+	transition:.3s;
+	display:block!important;
+}
+#left-menu{
+	width:0px;
+	transition:.3s;
+}
+#header_mobile{
+	display:none!important;
+}
+#open_menu_left{
+	display:none!important;
+}
+.main_nav{
+	display:block;
+}
+
+.menu-item:hover{
+	background:var(--secondary-color);
+	transition:.3s;
+}
+
+@media only screen and (max-width: 1024px) {
+ #header_mobile{
+ display:flex;
+ }
+.main_nav{
+	display:none!important;
+}
+#open_menu_left{
+	display:flex!important;
+}
+.open-menu{
+	width:50%!important;
+}
 }

@@ -11,9 +11,9 @@
 	
     <script type="text/javascript" th:src="@{/js/jquery-3.6.1.min.js}"></script>
 	<script src="https://kit.fontawesome.com/f31baacecd.js" crossorigin="anonymous"></script>
-    <script src="//js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+ <!--   <script src="//js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
 	<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
-	
+	 --> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -21,16 +21,16 @@
 <div th:fragment="header_nav">
 	<div th:replace="master/views/fragments/header::header_desktop">
 	</div>
-	<div th:replace="master/views/fragments/header::header_mobile">
-	</div>
 </div>
 
 
-<div th:fragment="left_menu_bar">
+<div id="left-menu" th:fragment="left_menu_bar">
 	<div class="nav left_menu_bar">
 	<a th:href="@{/master?content=dashboard}" class="nav-link btn logo_nav" ><img class="logo" th:src="@{/images/logo.png}"/></a>
 		<div class="left_menu_content">
-			
+			<div class="btn">
+				<a class="admin_name" ><i class="fa-solid fa-user-tie"></i> [[${#request.userPrincipal.principal.fullname}]]</a> 
+			</div>
 			<a th:href="@{/master?content=dashboard}" th:class="${content} == dashboard ? 'nav-link btn col-12 active' : 'nav-link btn col-12'" ><i class="fa-solid fa-house"></i>Dashboard</a>
 			<a th:href="@{/master?content=products}" th:class="${content} == products ? 'nav-link btn col-12 active' : 'nav-link btn col-12'"><i class="fa-solid fa-database"></i>Products</a>
 			<a th:href="@{/master?content=users}" th:class="${content} == users ? 'nav-link btn col-12 active' : 'nav-link btn col-12'"><i class="fa-solid fa-user"></i>Users</a>

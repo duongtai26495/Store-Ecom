@@ -6,20 +6,37 @@
 
 <div th:fragment="header_desktop">
 <nav class="container-fluid main_nav">
-	<div class="col-12">
-		<div class="btn">
-			<span id="menu_icon"><i class="fa-solid fa-bars"></i></span>
-		</div>
-		<div class="btn">
-			<a class="admin_name" ><i class="fa-solid fa-user-tie"></i> [[${#request.userPrincipal.principal.fullname}]]</a> 
-		</div>
+	<div class="col-12 d-flex flex-row">
+		<a th:href="@{/master?content=dashboard}" class="nav-link btn logo_nav" ><img class="logo" th:src="@{/images/logo.png}"/></a>
+		<div class="header_menu d-flex flex-row">
+			<div class="btn">
+				<a class="admin_name" ><i class="fa-solid fa-user-tie"></i> [[${#request.userPrincipal.principal.fullname}]]</a>
+				<a th:href="@{/user/logout}" class="nav-link btn text-warning"><i class="fa-solid fa-right-from-bracket"></i>Log out</a>
+		 
+			</div>
+			<a th:href="@{/master?content=dashboard}" th:class="${content} == dashboard ? 'nav-link btn active' : 'nav-link btn'" ><i class="fa-solid fa-house"></i>Dashboard</a>
+			
+			<a th:href="@{/master?content=products}" th:class="${content} == products ? 'menu-item nav-link btn active' : 'menu-item nav-link btn'"><i class="fa-solid fa-database"></i>Products</a>
+			
+			<a th:href="@{/master?content=users}" th:class="${content} == users ? 'nav-link btn active' : 'nav-link btn'"><i class="fa-solid fa-user"></i>Users</a>
+			
+			<a th:href="@{/master?content=vendors}" th:class="${content} == vendors ? 'nav-link btn active' : 'nav-link btn'"><i class="fa-solid fa-copyright"></i>Vendors</a>
+			
+			<a th:href="@{/master?content=categories}" th:class="${content} == categories ? 'nav-link btn active' : 'nav-link btn'"><i class="fa-solid fa-cat"></i>Categories</a>
+			</div>
+		<a th:if="${content} == products" class="btn btn-light align-self-center" id="btn_open_new_p" >
+		<i class="fa-solid fa-plus"></i> New Product
+		</a>
 	</div>
 </nav>
 
-<div th:fragment="header_mobile">
+	<div id="header_mobile col-12" th:fragment="header_mobile">
+		<div id="open_menu_left" class="btn d-flex align-items-center">
+			<span id="menu_icon"><i class="fa-solid fa-bars"></i></span>
+		</div>
+	</div>
 
-<div th:replace="master/views/fragments/fragments::script_footer"></div>
 </div>
-</div>
+
 </body>
 </html>
